@@ -35,7 +35,7 @@
 
                         surgeEl.innerHTML = 'SURGE: ' + surgeVal;
                         
-                        fetch('/next/' + surgeVal).then(res => {
+                        fetch('next/' + surgeVal).then(res => {
                             res.json().then(json => {
                                 conflictEl.innerText = 'CONFLICT: ' + json.conflict;
                                 knowledgeEl.innerText = 'KNOWLEDGE: '+ json.knowledge;
@@ -78,12 +78,12 @@
             <div id="conflict" class="p-3 text-sm border cursor-pointer border-black h-10 uppercase bg-white box-shadow-black"> Conflict: {{index . "conflict"}}</div>
             <div id="endings" class="p-3 text-sm border cursor-pointer border-black h-10 uppercase bg-white box-shadow-black"> Endings: {{index . "endings"}}</div>
             </section>
-            <section id="unexpected" class="m-3 p-3 text-sm border cursor-pointer border-black uppercase bg-lime-300 box-shadow-black">{{index . "unexpected"}}</section>
-            <section id="surge" class="p-3 text-sm border cursor-pointer border-black h-10 uppercase bg-red-300 box-shadow-black">Surge: 0</section>
+            <section id="unexpected" class="m-3 p-3 text-sm border border-black uppercase bg-lime-300 box-shadow-black">{{index . "unexpected"}}</section>
+            <section id="surge" class="p-3 text-sm border border-black h-10 uppercase bg-red-300 box-shadow-black">Surge: 0</section>
             <section>
                 <input id="noSurge" type="checkbox"></input><label for="noSurge">Disable surge counter</label>
             </section>
-            <section class="m-3 p-9 text-sm border cursor-pointer border-black uppercase bg-yellow-300 box-shadow-black">Scene Recipe:<br>
+            <section class="m-3 p-9 text-sm border border-black uppercase bg-yellow-300 box-shadow-black">Scene Recipe:<br>
                 <ul class="m-3 p-3" style="list-style-type: disclosure-closed;">
                     <li>There must be at least one PC in a scene.</li>
                     <li>Scene must have a main thread.</li>

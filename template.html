@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <style>{{index . "css"}}</style>
+        <script>
+            onload=function(){
+                var getCurrentSurge = function(){
+                        return surgeEl.innerText.replace('SURGE: ', '') -0;
+                    },
+                    surgeEl = document.getElementById('surge'),
+                    unexpectedEl = document.getElementById('unexpected'),
+                    knowledgeEl = document.getElementById('knowledge'),
+                    conflictEl =  document.getElementById('conflict'),
+                    endingsEl =  document.getElementById('endings'),
+                    noSurge = document.querySelector('#noSurge');
+
+                    noSurge.onclick=function(){
+                        if (noSurge.checked) {
+                            surgeEl.style.filter='grayscale(1)';
+                        }else{
+                            surgeEl.style.filter='';
+                        }
+                    }
+
+                    knowledgeEl.onclick = conflictEl.onclick = endingsEl.onclick = function cleck(e){
+                        var meContent = this.innerText;
+                        var surgeVal = getCurrentSurge();
+                        if (meContent.toLowerCase().endsWith('yes') || meContent.toLowerCase().endsWith('no')) {
+                            surgeVal += 2;   
+                        } else {
+                            surgeVal = 0;
+                        }
+                        if (noSurge.checked) {
+                            surgeVal = 0;
+                        }
+
+                        surgeEl.innerHTML = 'SURGE: ' + surgeVal;
+                        
+                        fetch('/next/' + surgeVal).then(res => {
+                            res.json().then(json => {
+                                conflictEl.innerText = 'CONFLICT: ' + json.conflict;
+                                knowledgeEl.innerText = 'KNOWLEDGE: '+ json.knowledge;
+                                endingsEl.innerText = 'ENDINGS: ' + json.endings;
+                                unexpectedEl.innerText = json.unexpected;
+                                //alert(json);
+                            })
+                        })
+                    }
+            }
+        </script>
+    </head>
+
+    <body>
+        <svg style="position:absolute;height:100vh;z-index:-999;left:0;right:0;margin-left:auto;margin-right:auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 744.09 1052.4">
+            <defs>
+              <radialGradient id="a" cx="508.71" cy="311.51" r="146.62" gradientTransform="matrix(1.2184 0 0 1.3531 -111.1 -109.98)" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#cbcbcb"/>
+                <stop offset=".668" stop-color="#f4f4ff"/>
+                <stop offset="1" stop-color="#ccf"/>
+              </radialGradient>
+              <linearGradient id="c" x1="90" x2="690" y1="780" y2="780" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#c00562"/>
+                <stop offset=".504" stop-color="#c9aeff" stop-opacity=".988"/>
+                <stop offset="1" stop-color="#c00562" stop-opacity=".973"/>
+              </linearGradient>
+              <filter id="b" width="1.291" height="1.476" x="-.145" y="-.238">
+                <feGaussianBlur stdDeviation="8"/>
+              </filter>
+            </defs>
+            <g fill-rule="evenodd">
+              <path fill="url(#a)" d="M655.33 311.51a146.62 156.61 0 1 1-293.23 0 146.62 156.61 0 1 1 293.23 0z" transform="translate(-780.613 -260.625) scale(2.2658)"/>
+              <path fill="#fff" d="M599.79 248.2a79.972 48.872 0 1 1-159.94 0 79.972 48.872 0 1 1 159.94 0z" filter="url(#b)" transform="matrix(2.4236 0 0 2.3828 -893.43 -342.008)"/>
+              <path fill="url(#c)" d="M179.97 679.99c138.48 107.58 272.01 106.77 406.96-6.77 23.94 53.09 60.07 118.53 7.53 153.49-144.23 80-292.6 80-417.14 0-43.94-22.86-15-89.58 2.65-146.72z" transform="translate(-47.502 -40.556) scale(1.1041)"/>
+            </g>
+          </svg>
+        <section class="m-3 p-3 flex flex-col">
+        <section class="space-y-4">
+            <div id="knowledge" class="p-3 text-sm border cursor-pointer border-black h-10 uppercase bg-white box-shadow-black"> Knowledge: {{index . "knowledge"}}</div>
+            <div id="conflict" class="p-3 text-sm border cursor-pointer border-black h-10 uppercase bg-white box-shadow-black"> Conflict: {{index . "conflict"}}</div>
+            <div id="endings" class="p-3 text-sm border cursor-pointer border-black h-10 uppercase bg-white box-shadow-black"> Endings: {{index . "endings"}}</div>
+            </section>
+            <section id="unexpected" class="m-3 p-3 text-sm border cursor-pointer border-black uppercase bg-lime-300 box-shadow-black">{{index . "unexpected"}}</section>
+            <section id="surge" class="p-3 text-sm border cursor-pointer border-black h-10 uppercase bg-red-300 box-shadow-black">Surge: 0</section>
+            <section>
+                <input id="noSurge" type="checkbox"></input><label for="noSurge">Disable surge counter</label>
+            </section>
+            <section class="m-3 p-9 text-sm border cursor-pointer border-black uppercase bg-yellow-300 box-shadow-black">Scene Recipe:<br>
+                <ul class="m-3 p-3" style="list-style-type: disclosure-closed;">
+                    <li>There must be at least one PC in a scene.</li>
+                    <li>Scene must have a main thread.</li>
+                    <li>The stage of the scene must be set by the main thread.</li>
+                    <li>A location is required for a scene.</li>
+                    <li>There's likely other NPC's in the scene.</li>
+                </ul>
+            </section>
+        </section>
+    </body>
+</html>

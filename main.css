@@ -7,4 +7,10 @@
     .box-shadow-black {
       box-shadow: 0.125rem 0.125rem 0 0px #000;
     }
+    .link {
+        @apply font-medium;
+        @apply text-blue-600; 
+        @apply dark:text-blue-500;
+        @apply hover:underline;
+    }
   }

@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <style>{{index . "css"}}</style>
         <script>
             onload=function(){
@@ -41,7 +42,6 @@
                                 knowledgeEl.innerText = 'KNOWLEDGE: '+ json.knowledge;
                                 endingsEl.innerText = 'ENDINGS: ' + json.endings;
                                 unexpectedEl.innerText = json.unexpected;
-                                //alert(json);
                             })
                         })
                     }
@@ -49,8 +49,8 @@
         </script>
     </head>
 
-    <body>
-        <svg style="position:absolute;height:100vh;z-index:-999;left:0;right:0;margin-left:auto;margin-right:auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 744.09 1052.4">
+    <body style="overflow: hidden;">
+        <svg style="position:absolute;width:100vw;z-index:-999;left:0;right:0;margin-left:auto;margin-right:auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 744.09 1052.4">
             <defs>
               <radialGradient id="a" cx="508.71" cy="311.51" r="146.62" gradientTransform="matrix(1.2184 0 0 1.3531 -111.1 -109.98)" gradientUnits="userSpaceOnUse">
                 <stop offset="0" stop-color="#cbcbcb"/>
@@ -80,18 +80,10 @@
             </section>
             <section id="unexpected" class="m-3 p-3 text-sm border border-black uppercase bg-lime-300 box-shadow-black">{{index . "unexpected"}}</section>
             <section id="surge" class="p-3 text-sm border border-black h-10 uppercase bg-red-300 box-shadow-black">Surge: 0</section>
-            <section>
+            <section class="m-3">
                 <input id="noSurge" type="checkbox"></input><label for="noSurge">Disable surge counter</label>
-            </section>
-            <section class="m-3 p-9 text-sm border border-black uppercase bg-yellow-300 box-shadow-black">Scene Recipe:<br>
-                <ul class="m-3 p-3" style="list-style-type: disclosure-closed;">
-                    <li>There must be at least one PC in a scene.</li>
-                    <li>Scene must have a main thread.</li>
-                    <li>The stage of the scene must be set by the main thread.</li>
-                    <li>A location is required for a scene.</li>
-                    <li>There's likely other NPC's in the scene.</li>
-                </ul>
-            </section>
+            </section>           
         </section>
+        <footer class="p-3" style="position: absolute;bottom:0;background-color:wheat; width: 100%;">Loom of fate is an implementation of the Loom of fate + surge counter as described in <a class="link" href="https://www.drivethrurpg.com/product/145426/CRGE-Conjectural-Roleplaying-GM-Emulator">CRGE Conjectural Roleplaying GM Emulator</a>, from the late Zach Best .<br />Source available on <a href="https://github.com/kentaromiura/loomoffate" class="link">GitHub</a>.</footer>
     </body>
 </html>

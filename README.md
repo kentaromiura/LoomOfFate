@@ -1,7 +1,7 @@
 Loom of fate
 ===
 
-Loom of fate is an implementation of the Loom of fate + surge counter as described in https://www.drivethrurpg.com/product/145426/CRGE-Conjectural-Roleplaying-GM-Emulator, from the late Zach Best .
+[Loom of fate](http://www.cristian.tokyo/loom/) is an implementation of the Loom of fate + surge counter as described in https://www.drivethrurpg.com/product/145426/CRGE-Conjectural-Roleplaying-GM-Emulator, from the late Zach Best .
 
 It's meant as a GM emulator for playing solo-adventures, allowing one to play alone games that otherwise require at least 2 people .
 
